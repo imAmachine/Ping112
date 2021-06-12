@@ -24,57 +24,64 @@ namespace Ping112
         {
             try
             {
+                //  Получение строк таблицы DataGridView
                 List<DataGridViewRow> gridRows = dataGridView1.Rows.Cast<DataGridViewRow>().ToList();
+
+                //  Бесконечный цикл обработки запросов Ping
                 while (true)
                 {
-                    if (ListDds.AllDds.Count > 0)
+                    //  Параллельная обработка всех строк DataGridView
+                    gridRows.AsParallel().ForAll(currRow =>
                     {
-                        ListDds.AllDds.AsParallel().ForAll(dds =>
-                        {
-                            DataGridViewRow cur = gridRows.FirstOrDefault(r => r.DataBoundItem == dds);
-                            if (cur != null)
-                            {
-                                List<DataGridViewCell> cells = cur.Cells.Cast<DataGridViewCell>().Skip(1).Take(4).ToList();
-                                cells.AsParallel().ForAll(cell =>
-                                {
-                                    if (cell.Value != null)
-                                    {
-                                        string[] ip = cell.Value.ToString()
-                                                        .Split(',')
-                                                        .Select(c => c.Trim())
-                                                        .ToArray();
-                                        if (ip.Length > 1)
-                                        {
-                                            bool[] replyes = Services.PingDds(ip);
-                                            List<bool> notConnected = replyes.Where(r => r == false).ToList();
+                        //  Получение ячеек текущей строки, содержащих ip адреса
+                        List<DataGridViewCell> cells = currRow.Cells.Cast<DataGridViewCell>().Skip(1).Take(4).ToList();
 
-                                            if (notConnected.Count == 0)
-                                                cell.Style.BackColor = Color.Green;
-                                            else if (notConnected.Count < replyes.Length)
-                                                cell.Style.BackColor = Color.Yellow;
-                                            else
-                                                cell.Style.BackColor = Color.Red;
-                                        }
-                                        else
-                                            cell.Style.BackColor = Services.PingDds(cell.Value.ToString()) ? Color.Green : Color.Red;
-                                    }
-                                });
-                            }
+                        //  параллельная обработка каждой ячейки текущей строки
+                        cells.AsParallel().ForAll(cell =>
+                        {
+                            //  получение списка ip адресов из ячейки
+                            string[] ip = cell.Value.ToString()
+                                            .Split(',')
+                                            .Select(c => c.Trim())
+                                            .ToArray();
+
+                            //  Получение ответов на запрос Ping для каждого ip адреса по порядку
+                            bool[] replyes = Services.PingDds(ip);                              //  Все ответы
+                            List<bool> notConnected = replyes.Where(r => r == false).ToList();  //  ответы с отключенными ip адресами
+
+                            /*  
+                             *  1. Если все ip в сети - отметить ячейку зелёным цветом
+                             *  2. Если часть ip адресов не в сети - пометить ячейку жёлтым цветом
+                             *  3. Если все ip адреса не в сети - пометить ячейку красным цветом
+                            */
+                            if (notConnected.Count == 0)                    //  1
+                                cell.Style.BackColor = Color.Green;
+                            else if (notConnected.Count < replyes.Length)   //  2
+                                cell.Style.BackColor = Color.Yellow;
+                            else                                            //  3
+                                cell.Style.BackColor = Color.Red;
                         });
-                    }
-                    Thread.Sleep(Properties.Settings.Default.PingRetry);
+                    });
+                    Thread.Sleep(Properties.Settings.Default.PingRetry);    //  Пауза перед следующим "прозвоном" ip адресов
                 }
             }
             catch { }
         }
 
+        /// <summary>
+        /// Обработчик кнопка импорта таблицы CSV
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void импортТаблицыToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //  Вызов окна выбора файла
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Filter = "CSV files|*.csv";
                 ofd.Title = "Выберите CSV файл";
 
+                // Если подключение выбранного файла прошло успешно, текущий путь к файлу CSV будет сохранён в память приложения
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     Properties.Settings.Default.CsvPath = ofd.FileName;
@@ -85,6 +92,11 @@ namespace Ping112
                 }
             }
         }
+
+        /// <summary>
+        /// Метод для инициализации импортируемой таблицы CSV, производит запуск потока для "прозвона" ip адресов по таблице
+        /// </summary>
+        /// <returns>Возвращает статус иициализации импортируемой таблицы</returns>
         private bool InitDdsList()
         {
             if (File.Exists(Properties.Settings.Default.CsvPath))
