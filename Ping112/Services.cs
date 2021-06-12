@@ -25,14 +25,9 @@ namespace Ping112
                             PingReply reply = ping.Send(ip, Properties.Settings.Default.PingTimeout);
                             if (reply.Status == IPStatus.Success)
                                 return true;
-                            else
-                                return false;
                         }
-                        else
-                            return false;
                     }
-                    else
-                        return false;
+                    return false;
                 }
             }
             catch { return false; }
@@ -45,21 +40,16 @@ namespace Ping112
             {
                 for (int i = 0; i < ipAdresses.Length; i++) 
                 {
-                    if (ipAdresses[i].Split('.').Length == 4)
+                    replyes[i] = false; //  Начальная инициализация
+                    if (ipAdresses[i].Split('.').Length == 4)   //  проверка корректности ip адреса
                     {
-                        if (IPAddress.TryParse(ipAdresses[i], out IPAddress ip))
+                        if (IPAddress.TryParse(ipAdresses[i], out IPAddress ip))    //  преобразование ip адреса к типу IPAdress
                         {
-                            PingReply reply = ping.Send(ip, Properties.Settings.Default.PingTimeout);
+                            PingReply reply = ping.Send(ip, Properties.Settings.Default.PingTimeout);   //  попытка отправки ping запроса
                             if (reply.Status == IPStatus.Success)
                                 replyes[i] = true;
-                            else
-                                replyes[i] = false;
                         }
-                        else
-                            replyes[i] = false;
                     }
-                    else
-                        replyes[i] = false;
                 }
             }
             return replyes;
@@ -69,8 +59,8 @@ namespace Ping112
         {
             using (StreamReader sr = new StreamReader(path, Encoding.UTF8))
             {
-                ListDds.AllDds.Clear();
-                sr.ReadLine(); //   Пропуск заголовков
+                ListDds.AllDds.Clear(); //  Очистка списка ДДС
+                sr.ReadLine(); //   Пропуск заголовков в CSV таблице
 
                 while (!sr.EndOfStream)
                 {

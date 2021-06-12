@@ -22,50 +22,53 @@ namespace Ping112
 
         private void PingTask()
         {
-            try
+            //  Получение строк таблицы DataGridView
+            List<DataGridViewRow> gridRows = dataGridView1.Rows.Cast<DataGridViewRow>().ToList();
+
+            //  Бесконечный цикл обработки запросов Ping
+            while (true)
             {
-                //  Получение строк таблицы DataGridView
-                List<DataGridViewRow> gridRows = dataGridView1.Rows.Cast<DataGridViewRow>().ToList();
-
-                //  Бесконечный цикл обработки запросов Ping
-                while (true)
+                //  Параллельная обработка всех строк DataGridView
+                gridRows.AsParallel().ForAll(currRow =>
                 {
-                    //  Параллельная обработка всех строк DataGridView
-                    gridRows.AsParallel().ForAll(currRow =>
-                    {
-                        //  Получение ячеек текущей строки, содержащих ip адреса
-                        List<DataGridViewCell> cells = currRow.Cells.Cast<DataGridViewCell>().Skip(1).Take(4).ToList();
+                    //  Получение ячеек текущей строки, содержащих ip адреса
+                    List<DataGridViewCell> cells = currRow.Cells.Cast<DataGridViewCell>().Skip(1).Take(4).ToList();
 
-                        //  параллельная обработка каждой ячейки текущей строки
-                        cells.AsParallel().ForAll(cell =>
+                    //  параллельная обработка каждой ячейки текущей строки
+                    cells.AsParallel().ForAll(cell =>
+                    {
+                        try
                         {
-                            //  получение списка ip адресов из ячейки
-                            string[] ip = cell.Value.ToString()
+                            if (cell.Value != null)
+                            {
+                                //  получение списка ip адресов из ячейки
+                                string[] ip = cell.Value.ToString()
                                             .Split(',')
                                             .Select(c => c.Trim())
                                             .ToArray();
 
-                            //  Получение ответов на запрос Ping для каждого ip адреса по порядку
-                            bool[] replyes = Services.PingDds(ip);                              //  Все ответы
-                            List<bool> notConnected = replyes.Where(r => r == false).ToList();  //  ответы с отключенными ip адресами
+                                //  Получение ответов на запрос Ping для каждого ip адреса по порядку
+                                bool[] replyes = Services.PingDds(ip);                              //  Все ответы
+                                List<bool> notConnected = replyes.Where(r => r == false).ToList();  //  ответы с отключенными ip адресами
 
-                            /*  
-                             *  1. Если все ip в сети - отметить ячейку зелёным цветом
-                             *  2. Если часть ip адресов не в сети - пометить ячейку жёлтым цветом
-                             *  3. Если все ip адреса не в сети - пометить ячейку красным цветом
-                            */
-                            if (notConnected.Count == 0)                    //  1
-                                cell.Style.BackColor = Color.Green;
-                            else if (notConnected.Count < replyes.Length)   //  2
-                                cell.Style.BackColor = Color.Yellow;
-                            else                                            //  3
-                                cell.Style.BackColor = Color.Red;
-                        });
+                                /*  
+                                    *  1. Если все ip в сети - отметить ячейку зелёным цветом
+                                    *  2. Если часть ip адресов не в сети - пометить ячейку жёлтым цветом
+                                    *  3. Если все ip адреса не в сети - пометить ячейку красным цветом
+                                */
+                                if (notConnected.Count == 0)                    //  1
+                                    cell.Style.BackColor = Color.Green;
+                                else if (notConnected.Count < replyes.Length)   //  2
+                                    cell.Style.BackColor = Color.Yellow;
+                                else                                            //  3
+                                    cell.Style.BackColor = Color.Red;
+                            }
+                        }
+                        catch { }
                     });
-                    Thread.Sleep(Properties.Settings.Default.PingRetry);    //  Пауза перед следующим "прозвоном" ip адресов
-                }
+                });
+                Thread.Sleep(Properties.Settings.Default.PingRetry);    //  Пауза перед следующим "прозвоном" ip адресов
             }
-            catch { }
         }
 
         /// <summary>
@@ -134,7 +137,7 @@ namespace Ping112
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            dataGridView1.AutoGenerateColumns = false;
+            //dataGridView1.AutoGenerateColumns = false;
             InitDdsList();
         }
 
