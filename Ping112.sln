@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ping112", "Ping112\Ping112.csproj", "{CC8D1BBE-A682-4AAC-819E-F64E04BA9251}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC8D1BBE-A682-4AAC-819E-F64E04BA9251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC8D1BBE-A682-4AAC-819E-F64E04BA9251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC8D1BBE-A682-4AAC-819E-F64E04BA9251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC8D1BBE-A682-4AAC-819E-F64E04BA9251}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17624580-5D18-4AE2-B186-68A89269DF3C}
+	EndGlobalSection
+EndGlobal
