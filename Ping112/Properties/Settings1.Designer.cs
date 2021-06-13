@@ -38,9 +38,9 @@ namespace Ping112.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public int PingTimeout {
+        public string PingTimeout {
             get {
-                return ((int)(this["PingTimeout"]));
+                return ((string)(this["PingTimeout"]));
             }
             set {
                 this["PingTimeout"] = value;
@@ -50,9 +50,9 @@ namespace Ping112.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public int PingRetry {
+        public string PingRetry {
             get {
-                return ((int)(this["PingRetry"]));
+                return ((string)(this["PingRetry"]));
             }
             set {
                 this["PingRetry"] = value;

@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Ping112
+{
+    public partial class SettingsForm : Form
+    {
+        public SettingsForm()
+        {
+            InitializeComponent();
+        }
+
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
+            nudPingTimeout.Value = Convert.ToDecimal(Properties.Settings.Default.PingTimeout);
+            nudPingDelay.Value = Convert.ToDecimal(Properties.Settings.Default.PingRetry);
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.PingTimeout = nudPingTimeout.Value.ToString();
+            Properties.Settings.Default.PingRetry = nudPingDelay.Value.ToString();
+            Properties.Settings.Default.Save();
+        }
+    }
+}

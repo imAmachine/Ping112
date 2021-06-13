@@ -5,10 +5,10 @@
     <Setting Name="CsvPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="PingTimeout" Type="System.Int32" Scope="User">
+    <Setting Name="PingTimeout" Type="System.String" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
-    <Setting Name="PingRetry" Type="System.Int32" Scope="User">
+    <Setting Name="PingRetry" Type="System.String" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
   </Settings>
