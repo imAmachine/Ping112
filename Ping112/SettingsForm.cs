@@ -19,6 +19,7 @@ namespace Ping112
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
+            Services.mre.Reset();
             nudPingTimeout.Value = Convert.ToDecimal(Properties.Settings.Default.PingTimeout);
             nudPingDelay.Value = Convert.ToDecimal(Properties.Settings.Default.PingRetry);
         }
@@ -28,6 +29,11 @@ namespace Ping112
             Properties.Settings.Default.PingTimeout = nudPingTimeout.Value.ToString();
             Properties.Settings.Default.PingRetry = nudPingDelay.Value.ToString();
             Properties.Settings.Default.Save();
+        }
+
+        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Services.mre.Set();
         }
     }
 }

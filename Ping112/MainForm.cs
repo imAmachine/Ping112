@@ -15,12 +15,42 @@ namespace Ping112
     public partial class MainForm : Form
     {
         Thread pingThr = null;
+        private bool _isFiltering = true;
+        private bool IsFiltering
+        {
+            get
+            {
+                return _isFiltering;
+            }
+            set
+            {
+                _isFiltering = value;
+                Services.FilterDgvCollection(dataGridView1, textBox2.Text.Trim(), Filters, value);
+            }
+        }
+        private List<string> Filters 
+        { 
+            get
+            {
+                return _filters;
+            }
+            set
+            {
+                _filters.Add(value[0]);
+                if (IsFiltering)
+                {
+                    Services.FilterDgvCollection(dataGridView1, textBox2.Text.Trim(), Filters, IsFiltering);
+                    listBox1.DataSource = null;
+                    listBox1.DataSource = Filters;;
+                }
+            }
+        }
+        private List<string> _filters = new List<string>();
+
         public MainForm()
         {
             InitializeComponent();
         }
-
-        
 
         /// <summary>
         /// Обработчик кнопка импорта таблицы CSV
@@ -85,11 +115,7 @@ namespace Ping112
         {
             using (SettingsForm sf = new SettingsForm())
             {
-                pingThr.Abort();
                 sf.ShowDialog();
-
-                pingThr = new Thread(Services.PingTask);
-                pingThr.Start(dataGridView1);
             }
         }
 
@@ -105,19 +131,7 @@ namespace Ping112
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            pingThr.Abort();
-
-            if (textBox1.Text.Length > 0)
-            {
-                List<DDS> list = ListDds.AllDds.Where(dds => dds.Name.ToLower().Contains(textBox1.Text.Trim())).ToList();
-                dataGridView1.DataSource = list;
-            }
-            else
-                dataGridView1.DataSource = ListDds.AllDds;
-            dataGridView1.ClearSelection();
-
-            pingThr = new Thread(Services.PingTask);
-            pingThr.Start(dataGridView1);
+            
         }
 
         private void MainForm_ClientSizeChanged(object sender, EventArgs e)
@@ -137,12 +151,31 @@ namespace Ping112
             DDS dds = row.DataBoundItem as DDS;
             using (DoubleClickForm dcf = new DoubleClickForm(dds))
             {
-                pingThr.Abort();
                 dcf.ShowDialog();
-
-                pingThr = new Thread(Services.PingTask);
-                pingThr.Start(dataGridView1);
             }
+        }
+
+        private void btnFilterAdd_Click(object sender, EventArgs e)
+        {
+            string filter = textBox2.Text.Trim();
+            textBox2.Clear();
+            Filters = new List<string>() { filter };
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            Services.FilterDgvCollection(dataGridView1, textBox2.Text.Trim(), Filters, IsFiltering);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            IsFiltering = (sender as CheckBox).Checked;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Filters.Clear();
+            listBox1.DataSource = Filters;
         }
     }
 }

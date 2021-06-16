@@ -119,6 +119,7 @@ namespace Ping112
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Настройки Ping";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudPingTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPingDelay)).EndInit();
