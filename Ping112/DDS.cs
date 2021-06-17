@@ -21,7 +21,6 @@ namespace Ping112
             IpRTK = ipRTK;
             IpPcs = ipPcs;
             IpPhones = ipPhones;
-            ListDds.AllDds.Add(this);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Ping112
                 Services.FilterDgvCollection(dataGridView1, textBox2.Text.Trim(), Filters, value);
             }
         }
-        private List<string> Filters 
+        private List<KeyValuePair<bool, string>> Filters 
         { 
             get
             {
@@ -36,16 +36,13 @@ namespace Ping112
             }
             set
             {
-                _filters.Add(value[0]);
+                KeyValuePair<bool, string> kvp = value.First();
+                _filters.Add(kvp);
                 if (IsFiltering)
-                {
                     Services.FilterDgvCollection(dataGridView1, textBox2.Text.Trim(), Filters, IsFiltering);
-                    listBox1.DataSource = null;
-                    listBox1.DataSource = Filters;;
-                }
             }
         }
-        private List<string> _filters = new List<string>();
+        private List<KeyValuePair<bool, string>> _filters = new List<KeyValuePair<bool, string>>();
 
         public MainForm()
         {
@@ -129,11 +126,6 @@ namespace Ping112
             pingThr.Abort();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void MainForm_ClientSizeChanged(object sender, EventArgs e)
         {
             dataGridView1.ClearSelection();
@@ -146,9 +138,8 @@ namespace Ping112
 
         private void dataGridView1_DoubleClick(object sender, EventArgs e)
         {
-            DataGridViewRow row = ((DataGridView)sender).SelectedCells[0].OwningRow;
+            DDS dds = (sender as DataGridView).SelectedCells[0].OwningRow.DataBoundItem as DDS;
 
-            DDS dds = row.DataBoundItem as DDS;
             using (DoubleClickForm dcf = new DoubleClickForm(dds))
             {
                 dcf.ShowDialog();
@@ -157,9 +148,15 @@ namespace Ping112
 
         private void btnFilterAdd_Click(object sender, EventArgs e)
         {
-            string filter = textBox2.Text.Trim();
-            textBox2.Clear();
-            Filters = new List<string>() { filter };
+            string filter = string.Empty;
+            if (textBox2.Text.Trim().Length > 0)
+                filter = textBox2.Text.Trim();
+            if (Filters.Where(f => f.Key || f.Value == filter).Count() > 0)
+                textBox2.Clear();
+
+            Filters = new List<KeyValuePair<bool, string>>() { new KeyValuePair<bool, string>(true, filter) };
+
+            textBox2.Text = Filters.Where(f => f.Key).First().Value;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -175,7 +172,24 @@ namespace Ping112
         private void button1_Click(object sender, EventArgs e)
         {
             Filters.Clear();
+            listBox1.DataSource = null;
             listBox1.DataSource = Filters;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string filter = textBox2.Text.Trim();
+            textBox2.Clear();
+
+            Filters = new List<KeyValuePair<bool, string>>() { new KeyValuePair<bool, string>(false, filter) };
+
+            listBox1.DataSource = null;
+            listBox1.DataSource = Filters.ToList();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
