@@ -57,23 +57,33 @@ namespace Ping112
             mre.Reset();
 
             DataGridView dgv = dataGridView as DataGridView;
-            List<DDS> ddses = new List<DDS>();
+            List<DDS> ddses = ListDds.AllDds;
             List<DDS> result = new List<DDS>();
 
             if (isFiltering && filters.Count > 0)
             {
-                var primary = filters.Where(f => f.Key).ToList();
+                var primaryFilter = filters.Where(f => f.Key);
                 var secondary = filters.Where(f => !f.Key).ToList();
 
-                primary.ForEach(f => ddses = ListDds.AllDds.Where(dds => dds.Name.ToLower().Contains(f.Value.ToLower())).ToList());
-                secondary.ForEach(f => result.AddRange(ddses.Where(dds => dds.Name.ToLower().Contains(f.Value.ToLower())).ToList()));
+                if (primaryFilter.Count() > 0)
+                    ddses = ddses.Where(dds => dds.Name.ToLower().Contains(primaryFilter.First().Value.ToLower())).ToList();
+                if (secondary.Count > 0)
+                {
+                    foreach (var secFilter in secondary)
+                    {
+                        string val = secFilter.Value.ToLower().Trim();
+                        var filteredCollection = ddses.Where(dds => dds.Name.ToLower().Trim().Contains(val)).ToList();
+                        result.AddRange(filteredCollection);
+                    }
+                }
             }
-
+            
             if (search.Length > 0)
-                result = result.Where(dds => dds.Name.ToLower().Contains(search.ToLower())).ToList();
+                result.AddRange(ddses.Where(dds => dds.Name.ToLower().Contains(search.ToLower())).ToList());
             else
-                result = ListDds.AllDds;
+                result = ddses;
 
+            dgv.DataSource = null;
             dgv.DataSource = result;
             dgv.ClearSelection();
 
