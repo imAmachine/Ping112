@@ -9,7 +9,6 @@ using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ping112
 {
@@ -92,9 +91,8 @@ namespace Ping112
                 {
                     //  Получение строк таблицы DataGridView
                     List<DataGridViewRow> gridRows = dataGridView1.Rows.Cast<DataGridViewRow>().ToList();
-
                     //  Параллельная обработка всех строк DataGridView
-                    Parallel.ForEach(gridRows, currRow =>
+                    gridRows.AsParallel().ForAll(currRow =>
                     {
                         if (!mre.WaitOne())
                             return;
@@ -104,42 +102,42 @@ namespace Ping112
 
                         cells = cells.Skip(cells.Count > 1 ? 1 : 0).Take(cells.Count > 1 ? 4 : 1).ToList();
 
-                        //  параллельная обработка каждой ячейки текущей строки
-                        Parallel.ForEach(cells, cell =>
-                        {
-                                    if (!mre.WaitOne())
-                                        return;
-                                    try
+                    //  параллельная обработка каждой ячейки текущей строки
+                    cells.AsParallel().ForAll(cell =>
+                    {
+                                if (!mre.WaitOne())
+                                    return;
+                                try
+                                {
+                                    if (cell.Value != null)
                                     {
-                                        if (cell.Value != null)
-                                        {
-                                            //  получение списка ip адресов из ячейки
-                                            string[] ip = cell.Value.ToString()
-                                                        .Split(',')
-                                                        .Select(c => c.Trim())
-                                                        .ToArray();
+                                        //  получение списка ip адресов из ячейки
+                                        string[] ip = cell.Value.ToString()
+                                                    .Split(',')
+                                                    .Select(c => c.Trim())
+                                                    .ToArray();
 
-                                            //  Получение ответов на запрос Ping для каждого ip адреса по порядку
-                                            bool[] replyes = PingDds(ip);                              //  Все ответы
-                                            List<bool> notConnected = replyes.Where(r => r == false).ToList();  //  ответы с отключенными ip адресами
+                                        //  Получение ответов на запрос Ping для каждого ip адреса по порядку
+                                        bool[] replyes = PingDds(ip);                              //  Все ответы
+                                        List<bool> notConnected = replyes.Where(r => r == false).ToList();  //  ответы с отключенными ip адресами
 
-                                            /*  
-                                            *  1. Если все ip в сети - отметить ячейку зелёным цветом
-                                            *  2. Если часть ip адресов не в сети - пометить ячейку жёлтым цветом
-                                            *  3. Если все ip адреса не в сети - пометить ячейку красным цветом
-                                            */
-                                            if (notConnected.Count == 0)                    //  1
-                                                cell.Style.BackColor = Color.Green;
-                                            else if (notConnected.Count < replyes.Length)   //  2
-                                                cell.Style.BackColor = Color.Yellow;
-                                            else                                            //  3
-                                                cell.Style.BackColor = Color.Red;
-                                        }
+                                        /*  
+                                        *  1. Если все ip в сети - отметить ячейку зелёным цветом
+                                        *  2. Если часть ip адресов не в сети - пометить ячейку жёлтым цветом
+                                        *  3. Если все ip адреса не в сети - пометить ячейку красным цветом
+                                        */
+                                        if (notConnected.Count == 0)                    //  1
+                                            cell.Style.BackColor = Color.Green;
+                                        else if (notConnected.Count < replyes.Length)   //  2
+                                            cell.Style.BackColor = Color.Yellow;
+                                        else                                            //  3
+                                            cell.Style.BackColor = Color.Red;
                                     }
-                                    catch { }
-                                });
-                        });
-                        //Thread.Sleep(Convert.ToInt32(Properties.Settings.Default.PingRetry));    //  Пауза перед следующим "прозвоном" ip адресов
+                                }
+                                catch { }
+                            });
+                    });
+                    //Thread.Sleep(Convert.ToInt32(Properties.Settings.Default.PingRetry));    //  Пауза перед следующим "прозвоном" ip адресов
                 }
             }
         }

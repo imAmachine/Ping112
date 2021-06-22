@@ -99,7 +99,7 @@ namespace Ping112
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(12, 85);
+            this.label3.Location = new System.Drawing.Point(12, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(209, 32);
             this.label3.TabIndex = 4;
@@ -109,7 +109,7 @@ namespace Ping112
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(233, 126);
+            this.ClientSize = new System.Drawing.Size(233, 210);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.nudPingDelay);
             this.Controls.Add(this.label2);
