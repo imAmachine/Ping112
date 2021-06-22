@@ -25,7 +25,7 @@ namespace Ping112
             set
             {
                 _isFiltering = value;
-                Services.FilterDgvCollection(dataGridView1, textBox2.Text.Trim(), Filters, value);
+                Services.FilterDgvCollection(dataGridView1, tb_Search.Text.Trim(), Filters, value);
             }
         }
         private List<KeyValuePair<bool, string>> Filters 
@@ -36,10 +36,9 @@ namespace Ping112
             }
             set
             {
-                KeyValuePair<bool, string> kvp = value.First();
-                _filters.Add(kvp);
+                _filters = value;
                 if (IsFiltering)
-                    Services.FilterDgvCollection(dataGridView1, textBox2.Text.Trim(), Filters, IsFiltering);
+                    Services.FilterDgvCollection(dataGridView1, tb_Search.Text.Trim(), _filters, IsFiltering);
             }
         }
         private List<KeyValuePair<bool, string>> _filters = new List<KeyValuePair<bool, string>>();
@@ -148,20 +147,18 @@ namespace Ping112
 
         private void btnFilterAdd_Click(object sender, EventArgs e)
         {
-            string filter = string.Empty;
-            if (textBox2.Text.Trim().Length > 0)
-                filter = textBox2.Text.Trim();
-            if (Filters.Where(f => f.Key || f.Value == filter).Count() > 0)
-                textBox2.Clear();
+            string filter = tb_Search.Text.Trim();
+            if (filter.Length > 0)
+            {
+                tb_Search.Clear();
+                Filters.RemoveAll(f => f.Key);
 
-            Filters = new List<KeyValuePair<bool, string>>() { new KeyValuePair<bool, string>(true, filter) };
-
-            textBox2.Text = Filters.Where(f => f.Key).First().Value;
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            Services.FilterDgvCollection(dataGridView1, textBox2.Text.Trim(), Filters, IsFiltering);
+                List<KeyValuePair<bool, string>> list = Filters;
+                list.Add(new KeyValuePair<bool, string>(true, filter));
+                Filters = list;
+                    
+                tb_PrimaryFilter.Text = filter;
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -172,24 +169,34 @@ namespace Ping112
         private void button1_Click(object sender, EventArgs e)
         {
             Filters.Clear();
-            listBox1.DataSource = null;
-            listBox1.DataSource = Filters;
+            lb_SecondaryFilters.DataSource = null;
+            lb_SecondaryFilters.DataSource = Filters;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnSecondaryAdd_Click(object sender, EventArgs e)
         {
-            string filter = textBox2.Text.Trim();
-            textBox2.Clear();
+            string filter = tb_Search.Text.Trim();
+            if (filter.Length > 0)
+            {
+                Filters.RemoveAll(f => f.Key == false && f.Value == filter);
 
-            Filters = new List<KeyValuePair<bool, string>>() { new KeyValuePair<bool, string>(false, filter) };
+                List<KeyValuePair<bool, string>> list = Filters;
+                list.Add(new KeyValuePair<bool, string>(false, filter));
+                tb_Search.Clear();
+                Filters = list;
 
-            listBox1.DataSource = null;
-            listBox1.DataSource = Filters.ToList();
+                lb_SecondaryFilters.DataSource = Filters.Where(f => f.Key == false).ToList();
+            }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void btnDeletePrimary_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void tb_Search_TextChanged(object sender, EventArgs e)
+        {
+            Services.FilterDgvCollection(dataGridView1, tb_Search.Text.Trim(), Filters, IsFiltering);
         }
     }
 }

@@ -46,18 +46,18 @@ namespace Ping112
             this.phoneCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn_DeletePrimary = new System.Windows.Forms.Button();
+            this.tb_PrimaryFilter = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btn_DelSelected = new System.Windows.Forms.Button();
+            this.btn_ClearSecondaryFilters = new System.Windows.Forms.Button();
+            this.chkb_UseFilters = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lb_SecondaryFilters = new System.Windows.Forms.ListBox();
             this.btnFilterAdd = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tb_Search = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -219,49 +219,48 @@ namespace Ping112
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.btn_DeletePrimary);
+            this.panel2.Controls.Add(this.tb_PrimaryFilter);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Controls.Add(this.btn_DelSelected);
+            this.panel2.Controls.Add(this.btn_ClearSecondaryFilters);
+            this.panel2.Controls.Add(this.chkb_UseFilters);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.listBox1);
+            this.panel2.Controls.Add(this.lb_SecondaryFilters);
             this.panel2.Controls.Add(this.btnFilterAdd);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.textBox2);
+            this.panel2.Controls.Add(this.tb_Search);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(723, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(207, 420);
             this.panel2.TabIndex = 3;
             // 
-            // button4
+            // btn_DeletePrimary
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btn_DeletePrimary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(9, 141);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(189, 23);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "Удалить фильтр";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btn_DeletePrimary.Location = new System.Drawing.Point(9, 159);
+            this.btn_DeletePrimary.Name = "btn_DeletePrimary";
+            this.btn_DeletePrimary.Size = new System.Drawing.Size(189, 23);
+            this.btn_DeletePrimary.TabIndex = 14;
+            this.btn_DeletePrimary.Text = "Удалить фильтр";
+            this.btn_DeletePrimary.UseVisualStyleBackColor = true;
+            this.btn_DeletePrimary.Click += new System.EventHandler(this.btnDeletePrimary_Click);
             // 
-            // textBox1
+            // tb_PrimaryFilter
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 115);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(189, 20);
-            this.textBox1.TabIndex = 13;
+            this.tb_PrimaryFilter.Location = new System.Drawing.Point(9, 133);
+            this.tb_PrimaryFilter.Name = "tb_PrimaryFilter";
+            this.tb_PrimaryFilter.Size = new System.Drawing.Size(189, 20);
+            this.tb_PrimaryFilter.TabIndex = 13;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(5, 91);
+            this.label3.Location = new System.Drawing.Point(5, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(152, 21);
             this.label3.TabIndex = 12;
@@ -278,68 +277,68 @@ namespace Ping112
             this.button3.TabIndex = 11;
             this.button3.Text = "+ secondary";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.btnSecondaryAdd_Click);
             // 
-            // button2
+            // btn_DelSelected
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btn_DelSelected.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(9, 387);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(189, 23);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Удалить выбранные";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_DelSelected.Location = new System.Drawing.Point(9, 387);
+            this.btn_DelSelected.Name = "btn_DelSelected";
+            this.btn_DelSelected.Size = new System.Drawing.Size(189, 23);
+            this.btn_DelSelected.TabIndex = 10;
+            this.btn_DelSelected.Text = "Удалить выбранные";
+            this.btn_DelSelected.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btn_ClearSecondaryFilters
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btn_ClearSecondaryFilters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(9, 358);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(189, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Очистить все";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_ClearSecondaryFilters.Location = new System.Drawing.Point(9, 358);
+            this.btn_ClearSecondaryFilters.Name = "btn_ClearSecondaryFilters";
+            this.btn_ClearSecondaryFilters.Size = new System.Drawing.Size(189, 23);
+            this.btn_ClearSecondaryFilters.TabIndex = 9;
+            this.btn_ClearSecondaryFilters.Text = "Очистить все";
+            this.btn_ClearSecondaryFilters.UseVisualStyleBackColor = true;
+            this.btn_ClearSecondaryFilters.Click += new System.EventHandler(this.button1_Click);
             // 
-            // checkBox1
+            // chkb_UseFilters
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.chkb_UseFilters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(9, 335);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(147, 17);
-            this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "Использовать фильтры";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.chkb_UseFilters.AutoSize = true;
+            this.chkb_UseFilters.Checked = true;
+            this.chkb_UseFilters.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkb_UseFilters.Location = new System.Drawing.Point(9, 335);
+            this.chkb_UseFilters.Name = "chkb_UseFilters";
+            this.chkb_UseFilters.Size = new System.Drawing.Size(147, 17);
+            this.chkb_UseFilters.TabIndex = 8;
+            this.chkb_UseFilters.Text = "Использовать фильтры";
+            this.chkb_UseFilters.UseVisualStyleBackColor = true;
+            this.chkb_UseFilters.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(5, 167);
+            this.label1.Location = new System.Drawing.Point(5, 188);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(160, 21);
+            this.label1.Size = new System.Drawing.Size(174, 21);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Вторичные фильтры:";
+            this.label1.Text = "Выборки по фильтрам:";
             // 
-            // listBox1
+            // lb_SecondaryFilters
             // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lb_SecondaryFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 21;
-            this.listBox1.Location = new System.Drawing.Point(9, 191);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(189, 130);
-            this.listBox1.TabIndex = 6;
+            this.lb_SecondaryFilters.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lb_SecondaryFilters.FormattingEnabled = true;
+            this.lb_SecondaryFilters.ItemHeight = 21;
+            this.lb_SecondaryFilters.Location = new System.Drawing.Point(9, 212);
+            this.lb_SecondaryFilters.Name = "lb_SecondaryFilters";
+            this.lb_SecondaryFilters.Size = new System.Drawing.Size(189, 109);
+            this.lb_SecondaryFilters.TabIndex = 6;
             // 
             // btnFilterAdd
             // 
@@ -363,16 +362,16 @@ namespace Ping112
             this.label2.TabIndex = 4;
             this.label2.Text = "Фильтрация по названию";
             // 
-            // textBox2
+            // tb_Search
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tb_Search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(9, 24);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(189, 29);
-            this.textBox2.TabIndex = 3;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.tb_Search.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tb_Search.Location = new System.Drawing.Point(9, 24);
+            this.tb_Search.Name = "tb_Search";
+            this.tb_Search.Size = new System.Drawing.Size(189, 29);
+            this.tb_Search.TabIndex = 3;
+            this.tb_Search.TextChanged += new System.EventHandler(this.tb_Search_TextChanged);
             // 
             // MainForm
             // 
@@ -410,21 +409,21 @@ namespace Ping112
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnFilterAdd;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox tb_Search;
+        private System.Windows.Forms.ListBox lb_SecondaryFilters;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ddsName;
         private System.Windows.Forms.DataGridViewTextBoxColumn vipNetCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn rtkCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn pcsCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneCol;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button btn_DelSelected;
+        private System.Windows.Forms.Button btn_ClearSecondaryFilters;
+        private System.Windows.Forms.CheckBox chkb_UseFilters;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox tb_PrimaryFilter;
+        private System.Windows.Forms.Button btn_DeletePrimary;
     }
 }
 
