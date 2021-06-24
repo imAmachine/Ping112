@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ping112
@@ -28,8 +24,8 @@ namespace Ping112
                 Services.FilterDgvCollection(dataGridView1, tb_Search.Text.Trim(), Filters, value);
             }
         }
-        private List<KeyValuePair<bool, string>> Filters 
-        { 
+        private List<KeyValuePair<bool, string>> Filters
+        {
             get
             {
                 return _filters;
@@ -156,7 +152,7 @@ namespace Ping112
                 List<KeyValuePair<bool, string>> list = Filters;
                 list.Add(new KeyValuePair<bool, string>(true, filter));
                 Filters = list;
-                    
+
                 tb_PrimaryFilter.Text = filter;
             }
         }

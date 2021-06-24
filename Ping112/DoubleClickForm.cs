@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -14,8 +10,8 @@ namespace Ping112
     {
         private DDS _dds = null;
         Thread[] pingThr = new Thread[4];
-        public DDS dds 
-        {   
+        public DDS dds
+        {
             get
             {
                 return _dds;
@@ -30,7 +26,7 @@ namespace Ping112
                 dgvPhones.DataSource = value.IpPhones.Split(',').Select(s => new { phones = s }).ToList();
                 dgvRtks.DataSource = value.IpRTK.Split(',').Select(s => new { rtks = s }).ToList();
                 dgvVipNets.DataSource = value.IpVipNet.Split(',').Select(s => new { vipnets = s }).ToList();
-                
+
                 dgvPcs.Columns[0].HeaderText = "Компьютеры";
                 dgvPhones.Columns[0].HeaderText = "Телефоны";
                 dgvRtks.Columns[0].HeaderText = "Коммутаторы";
