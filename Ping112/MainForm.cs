@@ -42,6 +42,7 @@ namespace Ping112
         public MainForm()
         {
             InitializeComponent();
+            tableLayoutPanel1.ColumnStyles[1].Width = 40;
         }
 
         /// <summary>
@@ -85,8 +86,9 @@ namespace Ping112
                     dataGridView1.DataSource = null;
                     dataGridView1.DataSource = ListDds.AllDds;
 
-                    pingThr = new Thread(Services.PingTask);
-                    pingThr.Start(dataGridView1);
+                    pingThr = new Thread(Services.PingThread);
+                    pingThr.IsBackground = true;
+                    pingThr.Start(new object[] { dataGridView1 });
                     return true;
                 }
                 else if (ListDds.AllDds.Count <= 0)
@@ -119,11 +121,6 @@ namespace Ping112
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             pingThr.Abort();
-        }
-
-        private void MainForm_ClientSizeChanged(object sender, EventArgs e)
-        {
-            dataGridView1.ClearSelection();
         }
 
         private void dataGridView1_Scroll(object sender, ScrollEventArgs e)
@@ -164,9 +161,8 @@ namespace Ping112
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Filters.Clear();
-            lb_SecondaryFilters.DataSource = null;
-            lb_SecondaryFilters.DataSource = Filters;
+            if (lb_SecondaryFilters.Items.Count > 0)
+                Filters.RemoveAll(f => !f.Key);
         }
 
         private void btnSecondaryAdd_Click(object sender, EventArgs e)
@@ -174,25 +170,70 @@ namespace Ping112
             string filter = tb_Search.Text.Trim();
             if (filter.Length > 0)
             {
-                Filters.RemoveAll(f => f.Key == false && f.Value == filter);
+                if (filter.Length > 0)
+                    Filters.RemoveAll(f => !f.Key && f.Value.Contains(filter));
 
                 List<KeyValuePair<bool, string>> list = Filters;
                 list.Add(new KeyValuePair<bool, string>(false, filter));
                 tb_Search.Clear();
                 Filters = list;
 
+                lb_SecondaryFilters.DisplayMember = "Value";
                 lb_SecondaryFilters.DataSource = Filters.Where(f => f.Key == false).ToList();
             }
         }
 
         private void btnDeletePrimary_Click(object sender, EventArgs e)
         {
-
+            Filters.RemoveAll(f => f.Key);
+            tb_PrimaryFilter.Clear();
         }
 
         private void tb_Search_TextChanged(object sender, EventArgs e)
         {
             Services.FilterDgvCollection(dataGridView1, tb_Search.Text.Trim(), Filters, IsFiltering);
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.ClearSelection();
+        }
+
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.Value != null && e.ColumnIndex != 0)
+            {
+                e.CellStyle.ForeColor = e.CellStyle.BackColor;
+                e.CellStyle.SelectionForeColor = e.CellStyle.SelectionBackColor;
+            }
+        }
+
+        private void btn_ShowClose_Click(object sender, EventArgs e)
+        {
+            if (tableLayoutPanel1.ColumnStyles[1].Width == 40)
+            {
+                btn_ShowClose.Text = ">>";
+                tableLayoutPanel1.ColumnStyles[1].Width = 250;
+            }
+            else
+            {
+                btn_ShowClose.Text = "<<";
+                tableLayoutPanel1.ColumnStyles[1].Width = 40;
+            }
+        }
+
+        private void btn_DelSelected_Click(object sender, EventArgs e)
+        {
+            if (lb_SecondaryFilters.SelectedItems.Count > 0)
+            {
+                List<KeyValuePair<bool, string>> list = Filters;
+                foreach (var fs in lb_SecondaryFilters.SelectedItems)
+                    list.Remove((KeyValuePair<bool, string>)fs);
+                Filters = list;
+                lb_SecondaryFilters.DataSource = null;
+                lb_SecondaryFilters.DisplayMember = "Value";
+                lb_SecondaryFilters.DataSource = Filters;
+            }
         }
     }
 }

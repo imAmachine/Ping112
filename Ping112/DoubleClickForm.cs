@@ -9,7 +9,7 @@ namespace Ping112
     public partial class DoubleClickForm : Form
     {
         private DDS _dds = null;
-        Thread[] pingThr = new Thread[4];
+        Thread pingThr;
         public DDS dds
         {
             get
@@ -22,15 +22,14 @@ namespace Ping112
                 _dds = value;
                 lbDdsName.Text = value.Name;
 
-                dgvPcs.DataSource = value.IpPcs.Split(',').Select(s => new { pcs = s }).ToList();
-                dgvPhones.DataSource = value.IpPhones.Split(',').Select(s => new { phones = s }).ToList();
-                dgvRtks.DataSource = value.IpRTK.Split(',').Select(s => new { rtks = s }).ToList();
-                dgvVipNets.DataSource = value.IpVipNet.Split(',').Select(s => new { vipnets = s }).ToList();
+                foreach (var i in Controls.OfType<DataGridView>())
+                    i.AutoGenerateColumns = false;
 
-                dgvPcs.Columns[0].HeaderText = "Компьютеры";
-                dgvPhones.Columns[0].HeaderText = "Телефоны";
-                dgvRtks.Columns[0].HeaderText = "Коммутаторы";
-                dgvVipNets.Columns[0].HeaderText = "VipNet";
+                dgv_Pc.DataSource = value.IpPcs.Split(',').Select(s => new { IpPcs = s }).ToList();
+                dgv_Phone.DataSource = value.IpPhones.Split(',').Select(s => new { IpPhones = s }).ToList();
+                dgv_RTK.DataSource = value.IpRTK.Split(',').Select(s => new { IpRTK = s }).ToList();
+                dgvVipNets.DataSource = value.IpVipNet.Split(',').Select(s => new { IpVipNet = s }).ToList();
+
             }
         }
         public DoubleClickForm(DDS dds)
@@ -41,28 +40,15 @@ namespace Ping112
 
         private void DoubleClickForm_Load(object sender, EventArgs e)
         {
-            dgvPcs.ClearSelection();
-            dgvPhones.ClearSelection();
-            dgvRtks.ClearSelection();
-            dgvVipNets.ClearSelection();
+            pingThr = new Thread(Services.PingThread) { IsBackground = true };
+            pingThr.Start(Controls.OfType<DataGridView>().ToArray());
 
-            pingThr[0] = new Thread(Services.PingTask);
-            pingThr[0].Start(dgvVipNets);
-
-            pingThr[1] = new Thread(Services.PingTask);
-            pingThr[1].Start(dgvRtks);
-
-            pingThr[2] = new Thread(Services.PingTask);
-            pingThr[2].Start(dgvPcs);
-
-            pingThr[3] = new Thread(Services.PingTask);
-            pingThr[3].Start(dgvPhones);
+            foreach (var i in Controls.OfType<DataGridView>())
+                i.ClearSelection();
         }
-
         private void DoubleClickForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach (Thread thr in pingThr)
-                thr.Abort();
+            pingThr.Abort();
         }
     }
 }

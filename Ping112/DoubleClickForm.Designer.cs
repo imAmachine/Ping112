@@ -52,13 +52,17 @@ namespace Ping112
             this.label1 = new System.Windows.Forms.Label();
             this.lbDdsName = new System.Windows.Forms.Label();
             this.dgvVipNets = new System.Windows.Forms.DataGridView();
-            this.dgvRtks = new System.Windows.Forms.DataGridView();
-            this.dgvPcs = new System.Windows.Forms.DataGridView();
-            this.dgvPhones = new System.Windows.Forms.DataGridView();
+            this.dgv_RTK = new System.Windows.Forms.DataGridView();
+            this.dgv_Phone = new System.Windows.Forms.DataGridView();
+            this.dgv_Pc = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VipNetCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVipNets)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRtks)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPcs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPhones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_RTK)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Phone)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Pc)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -89,6 +93,7 @@ namespace Ping112
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvVipNets.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvVipNets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVipNets.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvVipNets.BackgroundColor = System.Drawing.Color.Snow;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
@@ -99,6 +104,8 @@ namespace Ping112
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvVipNets.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVipNets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVipNets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.VipNetCol});
             this.dgvVipNets.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
@@ -120,6 +127,7 @@ namespace Ping112
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvVipNets.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvVipNets.RowHeadersWidth = 10;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.Transparent;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
@@ -132,15 +140,15 @@ namespace Ping112
             this.dgvVipNets.TabIndex = 6;
             this.dgvVipNets.VirtualMode = true;
             // 
-            // dgvRtks
+            // dgv_RTK
             // 
-            this.dgvRtks.AllowUserToAddRows = false;
-            this.dgvRtks.AllowUserToDeleteRows = false;
+            this.dgv_RTK.AllowUserToAddRows = false;
+            this.dgv_RTK.AllowUserToDeleteRows = false;
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvRtks.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvRtks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvRtks.BackgroundColor = System.Drawing.Color.Snow;
+            this.dgv_RTK.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgv_RTK.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_RTK.BackgroundColor = System.Drawing.Color.Snow;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -148,9 +156,11 @@ namespace Ping112
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRtks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.dgvRtks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRtks.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgv_RTK.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgv_RTK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_RTK.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1});
+            this.dgv_RTK.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -158,11 +168,11 @@ namespace Ping112
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Transparent;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRtks.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvRtks.Location = new System.Drawing.Point(236, 82);
-            this.dgvRtks.MultiSelect = false;
-            this.dgvRtks.Name = "dgvRtks";
-            this.dgvRtks.ReadOnly = true;
+            this.dgv_RTK.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dgv_RTK.Location = new System.Drawing.Point(236, 82);
+            this.dgv_RTK.MultiSelect = false;
+            this.dgv_RTK.Name = "dgv_RTK";
+            this.dgv_RTK.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -170,24 +180,29 @@ namespace Ping112
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRtks.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgv_RTK.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgv_RTK.RowHeadersWidth = 10;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Transparent;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dgvRtks.RowsDefaultCellStyle = dataGridViewCellStyle10;
-            this.dgvRtks.RowTemplate.ReadOnly = true;
-            this.dgvRtks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvRtks.Size = new System.Drawing.Size(218, 413);
-            this.dgvRtks.TabIndex = 7;
-            this.dgvRtks.VirtualMode = true;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgv_RTK.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgv_RTK.RowTemplate.ReadOnly = true;
+            this.dgv_RTK.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgv_RTK.Size = new System.Drawing.Size(218, 413);
+            this.dgv_RTK.TabIndex = 7;
+            this.dgv_RTK.VirtualMode = true;
             // 
-            // dgvPcs
+            // dgv_Phone
             // 
-            this.dgvPcs.AllowUserToAddRows = false;
-            this.dgvPcs.AllowUserToDeleteRows = false;
+            this.dgv_Phone.AllowUserToAddRows = false;
+            this.dgv_Phone.AllowUserToDeleteRows = false;
             dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvPcs.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
-            this.dgvPcs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPcs.BackgroundColor = System.Drawing.Color.Snow;
+            this.dgv_Phone.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            this.dgv_Phone.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_Phone.BackgroundColor = System.Drawing.Color.Snow;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -195,9 +210,11 @@ namespace Ping112
             dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPcs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
-            this.dgvPcs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPcs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgv_Phone.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.dgv_Phone.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Phone.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2});
+            this.dgv_Phone.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle13.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -205,11 +222,11 @@ namespace Ping112
             dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.Transparent;
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPcs.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvPcs.Location = new System.Drawing.Point(460, 82);
-            this.dgvPcs.MultiSelect = false;
-            this.dgvPcs.Name = "dgvPcs";
-            this.dgvPcs.ReadOnly = true;
+            this.dgv_Phone.DefaultCellStyle = dataGridViewCellStyle13;
+            this.dgv_Phone.Location = new System.Drawing.Point(684, 82);
+            this.dgv_Phone.MultiSelect = false;
+            this.dgv_Phone.Name = "dgv_Phone";
+            this.dgv_Phone.ReadOnly = true;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -217,24 +234,29 @@ namespace Ping112
             dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPcs.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            this.dgv_Phone.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            this.dgv_Phone.RowHeadersWidth = 10;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.Transparent;
             dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dgvPcs.RowsDefaultCellStyle = dataGridViewCellStyle15;
-            this.dgvPcs.RowTemplate.ReadOnly = true;
-            this.dgvPcs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvPcs.Size = new System.Drawing.Size(218, 413);
-            this.dgvPcs.TabIndex = 8;
-            this.dgvPcs.VirtualMode = true;
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgv_Phone.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            this.dgv_Phone.RowTemplate.ReadOnly = true;
+            this.dgv_Phone.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgv_Phone.Size = new System.Drawing.Size(218, 413);
+            this.dgv_Phone.TabIndex = 8;
+            this.dgv_Phone.VirtualMode = true;
             // 
-            // dgvPhones
+            // dgv_Pc
             // 
-            this.dgvPhones.AllowUserToAddRows = false;
-            this.dgvPhones.AllowUserToDeleteRows = false;
+            this.dgv_Pc.AllowUserToAddRows = false;
+            this.dgv_Pc.AllowUserToDeleteRows = false;
             dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvPhones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
-            this.dgvPhones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPhones.BackgroundColor = System.Drawing.Color.Snow;
+            this.dgv_Pc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            this.dgv_Pc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_Pc.BackgroundColor = System.Drawing.Color.Snow;
             dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -242,21 +264,23 @@ namespace Ping112
             dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPhones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
-            this.dgvPhones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPhones.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgv_Pc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            this.dgv_Pc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Pc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3});
+            this.dgv_Pc.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPhones.DefaultCellStyle = dataGridViewCellStyle18;
-            this.dgvPhones.Location = new System.Drawing.Point(684, 82);
-            this.dgvPhones.MultiSelect = false;
-            this.dgvPhones.Name = "dgvPhones";
-            this.dgvPhones.ReadOnly = true;
+            this.dgv_Pc.DefaultCellStyle = dataGridViewCellStyle18;
+            this.dgv_Pc.Location = new System.Drawing.Point(460, 82);
+            this.dgv_Pc.MultiSelect = false;
+            this.dgv_Pc.Name = "dgv_Pc";
+            this.dgv_Pc.ReadOnly = true;
             dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -264,23 +288,60 @@ namespace Ping112
             dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPhones.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            this.dgv_Pc.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            this.dgv_Pc.RowHeadersWidth = 10;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.Transparent;
             dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dgvPhones.RowsDefaultCellStyle = dataGridViewCellStyle20;
-            this.dgvPhones.RowTemplate.ReadOnly = true;
-            this.dgvPhones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvPhones.Size = new System.Drawing.Size(218, 413);
-            this.dgvPhones.TabIndex = 9;
-            this.dgvPhones.VirtualMode = true;
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgv_Pc.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            this.dgv_Pc.RowTemplate.ReadOnly = true;
+            this.dgv_Pc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgv_Pc.Size = new System.Drawing.Size(218, 413);
+            this.dgv_Pc.TabIndex = 8;
+            this.dgv_Pc.VirtualMode = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "IpRTK";
+            this.dataGridViewTextBoxColumn1.HeaderText = "RTK";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // VipNetCol
+            // 
+            this.VipNetCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.VipNetCol.DataPropertyName = "IpVipNet";
+            this.VipNetCol.HeaderText = "VipNet";
+            this.VipNetCol.Name = "VipNetCol";
+            this.VipNetCol.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "IpPcs";
+            this.dataGridViewTextBoxColumn3.HeaderText = "PC";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "IpPhones";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Phone";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // DoubleClickForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(923, 520);
-            this.Controls.Add(this.dgvPhones);
-            this.Controls.Add(this.dgvPcs);
-            this.Controls.Add(this.dgvRtks);
+            this.Controls.Add(this.dgv_Pc);
+            this.Controls.Add(this.dgv_Phone);
+            this.Controls.Add(this.dgv_RTK);
             this.Controls.Add(this.dgvVipNets);
             this.Controls.Add(this.lbDdsName);
             this.Controls.Add(this.label1);
@@ -291,9 +352,9 @@ namespace Ping112
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DoubleClickForm_FormClosing);
             this.Load += new System.EventHandler(this.DoubleClickForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVipNets)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRtks)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPcs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPhones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_RTK)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Phone)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Pc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,8 +364,12 @@ namespace Ping112
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbDdsName;
         private System.Windows.Forms.DataGridView dgvVipNets;
-        private System.Windows.Forms.DataGridView dgvRtks;
-        private System.Windows.Forms.DataGridView dgvPcs;
-        private System.Windows.Forms.DataGridView dgvPhones;
+        private System.Windows.Forms.DataGridView dgv_RTK;
+        private System.Windows.Forms.DataGridView dgv_Phone;
+        private System.Windows.Forms.DataGridView dgv_Pc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VipNetCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
     }
 }
