@@ -83,7 +83,10 @@ namespace Ping112
         {
             List<DataGridView> dgvsLst = (dgvs as object[]).Cast<DataGridView>().ToList();
             while (true)
+            {
                 Parallel.ForEach(dgvsLst, dgv => PingMethod(dgv));
+                Thread.Sleep(Convert.ToInt32(Properties.Settings.Default.PingRetry));    //  Пауза перед следующим "прозвоном" ip адресов
+            }
         }
 
         /// <summary>
@@ -145,7 +148,6 @@ namespace Ping112
                         catch { }
                     });
                 });
-                Thread.Sleep(Convert.ToInt32(Properties.Settings.Default.PingRetry));    //  Пауза перед следующим "прозвоном" ip адресов
             }
         }
 

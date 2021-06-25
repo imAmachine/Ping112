@@ -210,6 +210,7 @@ namespace Ping112
 
         private void btn_ShowClose_Click(object sender, EventArgs e)
         {
+            dataGridView1.Refresh();
             if (tableLayoutPanel1.ColumnStyles[1].Width == 40)
             {
                 btn_ShowClose.Text = ">>";
