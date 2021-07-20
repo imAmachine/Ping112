@@ -161,8 +161,7 @@ namespace Ping112
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (lb_SecondaryFilters.Items.Count > 0)
-                Filters.RemoveAll(f => !f.Key);
+            Filters.RemoveAll(f => !f.Key);
         }
 
         private void btnSecondaryAdd_Click(object sender, EventArgs e)
@@ -171,7 +170,7 @@ namespace Ping112
             if (filter.Length > 0)
             {
                 if (filter.Length > 0)
-                    Filters.RemoveAll(f => !f.Key && f.Value.Contains(filter));
+                    Filters.RemoveAll(f => !f.Key && f.Value == filter);
 
                 List<KeyValuePair<bool, string>> list = Filters;
                 list.Add(new KeyValuePair<bool, string>(false, filter));

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -109,9 +110,7 @@ namespace Ping112
                         return;
 
                     //  Получение ячеек текущей строки, содержащих ip адреса
-                    List<DataGridViewCell> cells = currRow.Cells.Cast<DataGridViewCell>().ToList();
-
-                    cells = cells.Skip(cells.Count > 1 ? 1 : 0).Take(cells.Count > 1 ? 4 : 1).ToList();
+                    List<DataGridViewCell> cells = currRow.Cells.Cast<DataGridViewCell>().Where(cell => Regex.IsMatch(cell.Value.ToString(), @"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}")).ToList();
 
                     //  параллельная обработка каждой ячейки текущей строки
                     Parallel.ForEach(cells, cell =>
