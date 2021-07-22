@@ -90,6 +90,11 @@ namespace Ping112
             }
         }
 
+        public static bool IpV4IsMatch(string ips)
+        {
+            return Regex.IsMatch(ips.ToString(), @"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}");
+        }
+
         /// <summary>
         /// Метод для однократной проверки всех адресов из DataGridView на доступность
         /// </summary>
@@ -110,7 +115,7 @@ namespace Ping112
                         return;
 
                     //  Получение ячеек текущей строки, содержащих ip адреса
-                    List<DataGridViewCell> cells = currRow.Cells.Cast<DataGridViewCell>().Where(cell => Regex.IsMatch(cell.Value.ToString(), @"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}")).ToList();
+                    List<DataGridViewCell> cells = currRow.Cells.Cast<DataGridViewCell>().Where(cell => IpV4IsMatch(cell.Value.ToString())).ToList();
 
                     //  параллельная обработка каждой ячейки текущей строки
                     Parallel.ForEach(cells, cell =>

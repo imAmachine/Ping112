@@ -21,7 +21,7 @@ namespace Ping112
             set
             {
                 _isFiltering = value;
-                Services.FilterDgvCollection(dataGridView1, tb_Search.Text.Trim(), Filters, value);
+                Services.FilterDgvCollection(dgvListDds, tb_Search.Text.Trim(), Filters, value);
             }
         }
         private List<KeyValuePair<bool, string>> Filters
@@ -34,7 +34,7 @@ namespace Ping112
             {
                 _filters = value;
                 if (IsFiltering)
-                    Services.FilterDgvCollection(dataGridView1, tb_Search.Text.Trim(), _filters, IsFiltering);
+                    Services.FilterDgvCollection(dgvListDds, tb_Search.Text.Trim(), _filters, IsFiltering);
             }
         }
         private List<KeyValuePair<bool, string>> _filters = new List<KeyValuePair<bool, string>>();
@@ -50,7 +50,7 @@ namespace Ping112
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void импортТаблицыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TsmiSettingsImport_Click(object sender, EventArgs e)
         {
             //  Вызов окна выбора файла
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -83,12 +83,12 @@ namespace Ping112
                 {
                     if (pingThr != null && pingThr.IsAlive)
                         pingThr.Abort();
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = ListDds.AllDds;
+                    dgvListDds.DataSource = null;
+                    dgvListDds.DataSource = ListDds.AllDds;
 
                     pingThr = new Thread(Services.PingThread);
                     pingThr.IsBackground = true;
-                    pingThr.Start(new object[] { dataGridView1 });
+                    pingThr.Start(new object[] { dgvListDds });
                     return true;
                 }
                 else if (ListDds.AllDds.Count <= 0)
@@ -105,7 +105,7 @@ namespace Ping112
             else
                 return false;
         }
-        private void параметрыPingToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TsmiSettingsParametersPing_Click(object sender, EventArgs e)
         {
             using (SettingsForm sf = new SettingsForm())
             {
@@ -125,10 +125,10 @@ namespace Ping112
 
         private void dataGridView1_Scroll(object sender, ScrollEventArgs e)
         {
-            dataGridView1.ClearSelection();
+            dgvListDds.ClearSelection();
         }
 
-        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        private void DataGridView1_DoubleClick(object sender, EventArgs e)
         {
             DDS dds = (sender as DataGridView).SelectedCells[0].OwningRow.DataBoundItem as DDS;
 
@@ -138,7 +138,7 @@ namespace Ping112
             }
         }
 
-        private void btnFilterAdd_Click(object sender, EventArgs e)
+        private void BtnFilterAdd_Click(object sender, EventArgs e)
         {
             string filter = tb_Search.Text.Trim();
             if (filter.Length > 0)
@@ -154,17 +154,17 @@ namespace Ping112
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             IsFiltering = (sender as CheckBox).Checked;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             Filters.RemoveAll(f => !f.Key);
         }
 
-        private void btnSecondaryAdd_Click(object sender, EventArgs e)
+        private void BtnSecondaryAdd_Click(object sender, EventArgs e)
         {
             string filter = tb_Search.Text.Trim();
             if (filter.Length > 0)
@@ -182,23 +182,23 @@ namespace Ping112
             }
         }
 
-        private void btnDeletePrimary_Click(object sender, EventArgs e)
+        private void BtnDeletePrimary_Click(object sender, EventArgs e)
         {
             Filters.RemoveAll(f => f.Key);
             tb_PrimaryFilter.Clear();
         }
 
-        private void tb_Search_TextChanged(object sender, EventArgs e)
+        private void TbSearch_TextChanged(object sender, EventArgs e)
         {
-            Services.FilterDgvCollection(dataGridView1, tb_Search.Text.Trim(), Filters, IsFiltering);
+            Services.FilterDgvCollection(dgvListDds, tb_Search.Text.Trim(), Filters, IsFiltering);
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvListDds_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView1.ClearSelection();
+            dgvListDds.ClearSelection();
         }
 
-        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void DgvListDds_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.Value != null && e.ColumnIndex != 0)
             {
@@ -207,9 +207,9 @@ namespace Ping112
             }
         }
 
-        private void btn_ShowClose_Click(object sender, EventArgs e)
+        private void Btn_ShowClose_Click(object sender, EventArgs e)
         {
-            dataGridView1.Refresh();
+            dgvListDds.Refresh();
             if (tableLayoutPanel1.ColumnStyles[1].Width == 40)
             {
                 btn_ShowClose.Text = ">>";
@@ -222,7 +222,7 @@ namespace Ping112
             }
         }
 
-        private void btn_DelSelected_Click(object sender, EventArgs e)
+        private void Btn_DelSelected_Click(object sender, EventArgs e)
         {
             if (lb_SecondaryFilters.SelectedItems.Count > 0)
             {
