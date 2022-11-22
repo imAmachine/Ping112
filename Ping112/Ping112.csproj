@@ -51,7 +51,7 @@
     <StartupObject>Ping112.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>emergency.ico</ApplicationIcon>
+    <ApplicationIcon>static\emergency.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.16.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
@@ -79,7 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DDS.cs" />
+    <Compile Include="objects\DDS.cs" />
     <Compile Include="DoubleClickForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,7 +92,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListDds.cs" />
+    <Compile Include="objects\ListDds.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">
@@ -147,7 +147,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="emergency.ico" />
+    <Content Include="static\emergency.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
