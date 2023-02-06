@@ -46,8 +46,6 @@ namespace Ping112
         /// <param name="isFiltering">Булевый параметр для определения нужно фильтровать коллекцию или не нужно</param>
         public static void FilterDgvCollection(object dataGridView, string search, List<KeyValuePair<bool, string>> filters, bool isFiltering)
         {
-            mre.Reset();
-
             DataGridView dgv = dataGridView as DataGridView;
             List<DDS> ddses = ListDds.AllDds;
             List<DDS> result = new List<DDS>();
@@ -72,8 +70,6 @@ namespace Ping112
 
             dgv.DataSource = result;
             dgv.ClearSelection();
-
-            mre.Set();
         }
 
         /// <summary>

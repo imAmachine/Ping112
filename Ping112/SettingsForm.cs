@@ -17,16 +17,16 @@ namespace Ping112
             nudPingDelay.Value = Convert.ToDecimal(Properties.Settings.Default.PingRetry);
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Services.mre.Set();
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.PingTimeout = nudPingTimeout.Value.ToString();
             Properties.Settings.Default.PingRetry = nudPingDelay.Value.ToString();
             Properties.Settings.Default.Save();
-        }
-
-        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Services.mre.Set();
         }
     }
 }
